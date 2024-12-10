@@ -41,19 +41,22 @@ void jugadoVSjugador(Tablero juego, char jugador1, char jugador2) {
                 break;
             }
     
-            JugadorActual = jugador2;
-            
+            if (JugadorActual == jugador1) {
+                JugadorActual = jugador2;
+            } else {
+                JugadorActual = jugador1;
+            }
         }else{
             cout << "Movimiento no valido, intenta de nuevo." << endl;
         }
     }
 }
 
-void jugadoVScomp(Tablero& juego, char jugador1, char jugador2) {
+void jugadoVScomp(Tablero juego, char jugador1, char jugador2) {
     char JugadorActual = jugador1;
 
     while (true) {
-        if (JugadorActual == jugador1) { // Turno del jugador humano
+        if (JugadorActual == jugador1) { 
             juego.mostrarTablero();
             int pos;
             cout << "Jugador " << JugadorActual << ", introduce la posición (1-9): " << endl;
@@ -76,22 +79,21 @@ void jugadoVScomp(Tablero& juego, char jugador1, char jugador2) {
                 break;
             }
 
-            JugadorActual = jugador2; // Cambia turno a la IA
+            JugadorActual = jugador2;
             
         } else { // Turno de la IA
             pair<int, int> mejorMovimiento = juego.encontrarMejorMovimiento();
 
             juego.hacerMovimiento(mejorMovimiento.first, mejorMovimiento.second, 'O');
-            cout << "IA ha jugado en la posición: "
-                 << (mejorMovimiento.first * 3 + mejorMovimiento.second + 1) << endl;
+            cout << "IA ha jugado en la posición: " << (mejorMovimiento.first * 3 + mejorMovimiento.second + 1) << endl;
 
             if (juego.verificarGanador('O')) {
                 juego.mostrarTablero();
-                cout << "IA ganó, suerte en la próxima." << endl;
+                cout << "IA ganó, estupido humano." << endl;
                 break;
             }
 
-            JugadorActual = jugador1; // Cambia turno al jugador humano
+            JugadorActual = jugador1;
         }
 
         if (juego.hayEmpate()) {
