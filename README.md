@@ -13,6 +13,8 @@ El algoritmo Minimax toma su nombre de su estrategia central: minimizar la máxi
 
 Este algoritmo desglosa el juego en un árbol de juego, una estructura de datos que representa todos los posibles movimientos futuros en el juego. Cada nodo del árbol es una «posición» o estado del juego, y las aristas son movimientos que conectan un estado con otro. Minimax evalúa las posiciones al final de este árbol (nodos hoja), asignándoles valores basados en su utilidad para un jugador, para después retroceder y asignar un valor a los nodos padres.
 
+El algoritmo de Alpha-Beta Pruning, tiene como objetivo reducir el tamaño del árbol de búsqueda. Para lograrlo, debemos proporcionar al algoritmo Min-Max criterios de detección que le indiquen cuándo debe detener la búsqueda en ciertas regiones del árbol una vez que haya encontrado el mínimo o máximo garantizado en ese nivel.
+
 
 ### Ejemplificación y análisis
 
