@@ -2,6 +2,7 @@
 #include "Tablero.h"
 #pragma once
 #include <string>
+#include <utility>
 
 using namespace std;
 
@@ -11,14 +12,14 @@ pair<int, int> obtenerCoordenadas(int posicion) {
     return {fila, columna}; 
 }
 
-void jugadoVSjugador(Tablero& juego, char jugador1, char jugador2) {
+void jugadoVSjugador(Tablero juego, char jugador1, char jugador2) {
     char JugadorActual = jugador1;
 
     while(true){
-        
+        cout << "Jugador vs Jugador.\n";
         juego.mostrarTablero();
         int pos;
-	    cout << "Jugador " << JugadorActual << ", introduce la posiciC3n (1-9): " << endl;
+	    cout << "Jugador " << JugadorActual << " es tu turno, introduce la posicion (1-9): " << endl;
         cin >> pos;
         
         pair<int, int> coordenadas = obtenerCoordenadas(pos);
@@ -30,23 +31,77 @@ void jugadoVSjugador(Tablero& juego, char jugador1, char jugador2) {
             
             if(juego.verificarGanador(JugadorActual)){
                 juego.mostrarTablero();
-                cout << "¡" << JugadorActual << " ha ganado!" <<endl;
+                cout << JugadorActual << " gano" <<endl;
                 break;
             }
             
             if(juego.hayEmpate()){
                 juego.mostrarTablero();
-                cout << "Es un empate. ¡Bien jugado ambos jugadores!" << endl;
+                cout << " Es un empate " << endl;
                 break;
             }
-            
-            JugadorActual = (JugadorActual == jugador1) ? jugador2 : jugador1;
+    
+            JugadorActual = jugador2;
             
         }else{
-            cout << "Movimiento inválido, intenta de nuevo." << endl;
+            cout << "Movimiento no valido, intenta de nuevo." << endl;
         }
     }
 }
+
+void jugadoVScomp(Tablero& juego, char jugador1, char jugador2) {
+    char JugadorActual = jugador1;
+
+    while (true) {
+        if (JugadorActual == jugador1) { // Turno del jugador humano
+            juego.mostrarTablero();
+            int pos;
+            cout << "Jugador " << JugadorActual << ", introduce la posición (1-9): " << endl;
+            cin >> pos;
+
+            pair<int, int> coordenadas = obtenerCoordenadas(pos);
+            int fila = coordenadas.first;
+            int columna = coordenadas.second;
+
+            if (!juego.movimientoValido(fila, columna)) {
+                cout << "Movimiento no válido, intenta de nuevo." << endl;
+                continue;
+            }
+
+            juego.hacerMovimiento(fila, columna, JugadorActual);
+
+            if (juego.verificarGanador(JugadorActual)) {
+                juego.mostrarTablero();
+                cout << JugadorActual << " ganó, felicidades humano." << endl;
+                break;
+            }
+
+            JugadorActual = jugador2; // Cambia turno a la IA
+            
+        } else { // Turno de la IA
+            pair<int, int> mejorMovimiento = juego.encontrarMejorMovimiento();
+
+            juego.hacerMovimiento(mejorMovimiento.first, mejorMovimiento.second, 'O');
+            cout << "IA ha jugado en la posición: "
+                 << (mejorMovimiento.first * 3 + mejorMovimiento.second + 1) << endl;
+
+            if (juego.verificarGanador('O')) {
+                juego.mostrarTablero();
+                cout << "IA ganó, suerte en la próxima." << endl;
+                break;
+            }
+
+            JugadorActual = jugador1; // Cambia turno al jugador humano
+        }
+
+        if (juego.hayEmpate()) {
+            juego.mostrarTablero();
+            cout << "Es un empate." << endl;
+            break;
+        }
+    }
+}
+
 
 class Menu {
 
@@ -61,12 +116,10 @@ public:
 			cout << "--------------------------------------------------------" << endl;
 			cout << "El Gato" << endl;
 			cout << "1. Jugador V/S Jugador" << endl;
-			cout << "2. Jugador V/S IA" << endl;
+			cout << "2. Jugador V/S Comp" << endl;
 			cout << "0. SALIR " << endl;
-			cout << "Seleccione una opciC3n: " << endl;
+			cout << "Seleccione una opcion: " << endl;
 			cout << "--------------------------------------------------------" << endl;
-
-
 
 			cin >> op;
 			switch(op) {
@@ -75,8 +128,8 @@ public:
 				jugadoVSjugador(juego,jugador,IA);
 				break;
 			case 2:
-
-				cout << "2..." << endl;
+			    juego.posTablero();
+				jugadoVScomp(juego,jugador,IA);
 				break;
 
 			case 0:
@@ -84,7 +137,7 @@ public:
 				break;
 
 			default:
-				cout << "OpciC3n no vC!lida. Presione Enter para continuar..." << endl;
+				cout << "Opcion no valida. Presione Enter para continuar..." << endl;
 				cin.ignore();
 				cin.get();
 				break;
