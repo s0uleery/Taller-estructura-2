@@ -1,6 +1,9 @@
 #include <iostream>
 #pragma once
 #include <string>
+#include <utility>
+
+using namespace std;
 
 class Tablero {
     
@@ -15,4 +18,9 @@ class Tablero {
         void hacerMovimiento(int fila, int columna, char jugador);
         bool verificarGanador(char jugador);
         bool hayEmpate();
+        char obtenerCelda(int fila, int columna) const;
+        void setCelda(int fila, int columna, char valor);
+        int miniMaxSin(Tablero& tab, int profundidad, bool isMaximing);
+        int miniMaxCon(Tablero& tab, int profundidad, int alfa,int beta, bool isMaximing);
+        pair<int, int> encontrarMejorMovimiento();
 };
