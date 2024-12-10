@@ -1,6 +1,5 @@
 #include <iostream>
 #include "Tablero.h"
-#pragma once
 #include <string>
 #include <utility>
 
