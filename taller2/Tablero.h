@@ -20,7 +20,7 @@ class Tablero {
         bool hayEmpate();
         char obtenerCelda(int fila, int columna) const;
         void setCelda(int fila, int columna, char valor);
-        int miniMaxSin(Tablero& tab, int profundidad, bool isMaximing);
-        int miniMaxCon(Tablero& tab, int profundidad, int alfa,int beta, bool isMaximing);
+        int miniMaxSin(Tablero tab, int profundidad, bool isMaximing);
+        int miniMaxCon(Tablero tab, int profundidad, int alfa,int beta, bool isMaximing);
         pair<int, int> encontrarMejorMovimiento();
 };
