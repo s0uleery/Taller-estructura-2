@@ -59,7 +59,7 @@ int minimax(vector<int>& piles, bool isMax) {
 isMax: Inicializa best con -INF, luego recorre todas las pilas y todas las posibles jugadas tomando desde 1 a k objetos de una pila. Juega el turno, llama recursivamente a minimax con el jugador contrario, y deshace el turno, por ultimo actualiza best con el valor máximo encontrado
 
 !isMax: Inicializa best con INF, luego recorre todas las pilas y todas las posibles jugadas. Juega un turno, llama recursivamente a minimax con el jugador contrario, y deshace el turno, por ultimo actualiza best con el valor mínimo encontrado
-```
+```c++
 // Función para encontrar el mejor movimiento
 Move findBestMove(vector<int>& piles) {
     int bestVal = -INF;
@@ -86,7 +86,7 @@ Esta función se centra en recorrer todas las pilas. Para cada pila, si tiene ob
 
 
 Si el valor de la jugada (moveVal) es mayor que el mejor valor encontrado (bestVal), actualiza bestMove y bestVal.
-```
+```c++
 int main() {
     vector<int> piles = {3, 4, 5};
     
