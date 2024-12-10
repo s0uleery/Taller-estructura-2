@@ -3,6 +3,7 @@
 Paralelo C1
 
 Clerians Márquez, 20.717.942-6 ; Valentina López, 21.392.825-2
+g++ *.cpp -o ejecutable
 
 Algoritmo minimax
 ====
