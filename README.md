@@ -111,5 +111,3 @@ Al implementar nuestro algoritmo obtendremos algo parecido al siguiente árbol d
 ![Captura8](https://github.com/user-attachments/assets/a60ebfb8-e84f-475c-9355-51ce9e2e6fd4)
 
 
-
-https://inteligenciaartificial360.com/glosario/algoritmo-minimax/
